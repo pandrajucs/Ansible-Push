@@ -1,6 +1,7 @@
 ---
 - hosts: localhost
   become: true
+  gather_facts: no
   tasks:      
   - name: stop if we have old docker container
     command: docker stop simple-devops-container
