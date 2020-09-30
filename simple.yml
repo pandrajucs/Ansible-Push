@@ -1,9 +1,7 @@
 ---
 - hosts: nodes
   become: true
-  gather_facts: yes
-  vars:
-    ip_address: "{{ ansible_facts['eth0']['ipv4']['address'] }}"
+  gather_facts: no
   tasks:      
   - name: stop if we have old docker container
     command: docker stop simple-devops-container
@@ -12,19 +10,15 @@
   - name: remove current docker image
     command: docker rmi padrajucs/dockerimage
     ignore_errors: yes
-  - name: pulling docker image
-    command: docker pull padrajucs/dockerimage 
 
-  - name: creating docker container
-    command: docker run --rm -dit --name simple-devops-container -p 80:8080 padrajucs/dockerimage
    
-  #- name: building docker image
-   # command: docker build -t padrajucs/dockerimage .
+  - name: building docker image
+    command: docker build -t padrajucs/dockerimage .
     
-  #- name: creating docker image
-    #command: docker run --rm -dit --name simple-devops-container -p 9000:8080 padrajucs/dockerimage
+  - name: creating docker image
+    command: docker run --rm -dit --name simple-devops-container -p 9000:8080 padrajucs/dockerimage
     
- # - name: push docker image to docker hub
-   # command: docker push padrajucs/dockerimage
+  - name: push docker image to docker hub
+    command: docker push padrajucs/dockerimage
    
 
