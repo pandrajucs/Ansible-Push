@@ -19,6 +19,7 @@
     
   # - name: push docker image to docker hub
      # command: docker push padrajucs/dockerimage
+   
   - name: pulling docker image
     command: docker pull padrajucs/dockerimage 
 
