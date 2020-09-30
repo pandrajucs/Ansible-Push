@@ -1,5 +1,5 @@
 ---
-- hosts: localhost
+- hosts: nodes
   become: true
   gather_facts: no
   tasks:      
@@ -11,11 +11,16 @@
     command: docker rmi padrajucs/dockerimage
     ignore_errors: yes
    
-  - name: building docker image
-    command: docker build -t padrajucs/dockerimage .
+  #- name: building docker image
+   # command: docker build -t padrajucs/dockerimage .
     
-  - name: creating docker image
-    command: docker run --rm -dit --name simple-devops-container -p 9000:8080 padrajucs/dockerimage
+  #- name: creating docker image
+   # command: docker run --rm -dit --name simple-devops-container -p 9000:8080 padrajucs/dockerimage
     
-  - name: push docker image to docker hub
-    command: docker push padrajucs/dockerimage
+  # - name: push docker image to docker hub
+     # command: docker push padrajucs/dockerimage
+  - name: pulling docker image
+    command: docker pull padrajucs/dockerimage 
+
+  - name: creating docker container
+    command: docker run --rm -dit --name simple-devops-container -p 8080:8080 padrajucs/dockerimage
