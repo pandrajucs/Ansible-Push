@@ -1,7 +1,9 @@
 ---
 - hosts: nodes
   become: true
-  gather_facts: no
+  gather_facts: yes
+  vars:
+    ip_address: "{{ ansible_facts['eth0']['ipv4']['address'] }}"
   tasks:      
   - name: stop if we have old docker container
     command: docker stop simple-devops-container
