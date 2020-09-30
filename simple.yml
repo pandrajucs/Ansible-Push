@@ -1,5 +1,5 @@
 ---
-- hosts: nodes
+- hosts: localhost
   become: true
   gather_facts: no
   tasks:      
